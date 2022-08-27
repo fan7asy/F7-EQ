@@ -692,6 +692,50 @@ void SimpleEQAudioProcessorEditor::paint(juce::Graphics& g)
     Image background = ImageCache::getFromMemory(BinaryData::bg_png, BinaryData::bg_pngSize);
 
     g.drawImageAt(background, 0, 0);
+
+    Path curve;
+
+    auto bounds = getLocalBounds();
+    auto center = bounds.getCentre();
+
+    g.setFont(Font("Iosevka Term Slab", 30, 0));
+
+    String title{ "F7 EQ" };
+    g.setFont(30);
+    auto titleWidth = g.getCurrentFont().getStringWidth(title);
+
+    curve.startNewSubPath(center.x, 32);
+    curve.lineTo(center.x - titleWidth * 0.45f, 32);
+
+    auto cornerSize = 20;
+    auto curvePos = curve.getCurrentPosition();
+    curve.quadraticTo(curvePos.getX() - cornerSize, curvePos.getY(),
+        curvePos.getX() - cornerSize, curvePos.getY() - 16);
+    curvePos = curve.getCurrentPosition();
+    curve.quadraticTo(curvePos.getX(), 2,
+        curvePos.getX() - cornerSize, 2);
+
+    curve.lineTo({ 0.f, 2.f });
+    curve.lineTo(0.f, 0.f);
+    curve.lineTo(center.x, 0.f);
+    curve.closeSubPath();
+
+    g.setColour(Colours::transparentWhite);
+    g.fillPath(curve);
+
+    curve.applyTransform(AffineTransform().scaled(-1, 1));
+    curve.applyTransform(AffineTransform().translated(getWidth(), 0));
+    g.fillPath(curve);
+
+
+    g.setColour(Colours::black);
+    g.drawFittedText(title, bounds, juce::Justification::centredTop, 1);
+
+    g.setColour(Colours::black);
+    g.setFont(14);
+    g.drawFittedText("LowCut", lowCutSlopeSlider.getBounds(), juce::Justification::centredBottom, 1);
+    g.drawFittedText("Peak", peakQualitySlider.getBounds(), juce::Justification::centredBottom, 1);
+    g.drawFittedText("HighCut", highCutSlopeSlider.getBounds(), juce::Justification::centredBottom, 1);
 }
 
 void SimpleEQAudioProcessorEditor::resized()

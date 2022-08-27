@@ -16,6 +16,7 @@
     </GROUP>
     <GROUP id="{D731DE86-F616-62B6-CA7E-9F3F8CAF8222}" name="Resources">
       <FILE id="PUEDIm" name="bg.png" compile="0" resource="1" file="Resources/bg.png"/>
+      <FILE id="HkJAfn" name="f7font.TTF" compile="0" resource="1" file="Resources/f7font.TTF"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
