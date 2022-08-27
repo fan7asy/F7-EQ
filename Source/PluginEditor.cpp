@@ -231,7 +231,6 @@ juce::String RotarySliderWithLabels::getDisplayString() const
 //==============================================================================
 ResponseCurveComponent::ResponseCurveComponent(SimpleEQAudioProcessor& p) : 
     audioProcessor(p),
-    //leftChannelFifo(&audioProcessor.leftChannelFifo)
     leftPathProducer(audioProcessor.leftChannelFifo),
     rightPathProducer(audioProcessor.rightChannelFifo)
 {
