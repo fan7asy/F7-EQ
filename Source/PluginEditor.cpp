@@ -25,11 +25,11 @@ void LookAndFeel::drawRotarySlider(juce::Graphics& g,
 
     auto enabled = slider.isEnabled();
 
-    g.setColour(enabled ? Colour(150u, 187u, 194u) : Colours::darkgrey);
+    g.setColour(Colours::transparentWhite);
     g.fillEllipse(bounds);
 
-    g.setColour(enabled ? Colour(41u, 147u, 169u) : Colours::grey);
-    g.drawEllipse(bounds, 1.f);
+    g.setColour(enabled ? Colours::black : Colours::lightgrey);
+    g.drawEllipse(bounds, 4.f);
 
     if (auto* rswl = dynamic_cast<RotarySliderWithLabels*>(&slider))
     {
@@ -101,7 +101,7 @@ void LookAndFeel::drawToggleButton(juce::Graphics& g,
 
         PathStrokeType pst(3.f, PathStrokeType::JointStyle::curved);
 
-        auto color = toggleButton.getToggleState() ? Colours::dimgrey : Colour(0u, 172u, 1u);
+        auto color = toggleButton.getToggleState() ? Colours::dimgrey : Colours::black;
 
         g.setColour(color);
         g.strokePath(powerButton, pst);
@@ -110,7 +110,7 @@ void LookAndFeel::drawToggleButton(juce::Graphics& g,
 
     else if (auto* analyzerButton = dynamic_cast<AnalyzerButton*>(&toggleButton))
     {
-        auto color = ! toggleButton.getToggleState() ? Colours::dimgrey : Colour(0u, 172u, 1u);
+        auto color = ! toggleButton.getToggleState() ? Colours::dimgrey : Colours::black;
 
         g.setColour(color);
 
@@ -150,7 +150,7 @@ void RotarySliderWithLabels::paint(juce::Graphics& g)
     auto center = sliderBounds.toFloat().getCentre();
     auto radius = sliderBounds.getWidth() * 0.5f;
 
-    g.setColour(Colour(0u, 172u, 1u));
+    g.setColour(Colours::black);
     g.setFont(getTextHeight());
 
     auto numChoices = labels.size();
@@ -348,7 +348,7 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
 {
     using namespace juce;
     // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll(Colours::black); //PLACE GIF HERE?
+    g.fillAll(Colours::transparentWhite);  //GIF HERE
 
     g.drawImage(background, getLocalBounds().toFloat());
 
@@ -422,27 +422,27 @@ void ResponseCurveComponent::paint(juce::Graphics& g)
         auto leftChannelFFTPath = leftPathProducer.getPath();
         leftChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY()));
 
-        g.setColour(Colours::skyblue);
+        g.setColour(Colours::darkgrey); //left channel color
         g.strokePath(leftChannelFFTPath, PathStrokeType(1.f));
 
         auto rightChannelFFTPath = rightPathProducer.getPath();
         rightChannelFFTPath.applyTransform(AffineTransform().translation(responseArea.getX(), responseArea.getY()));
 
-        g.setColour(Colours::lightyellow);
+        g.setColour(Colours::black); //right channel color
         g.strokePath(rightChannelFFTPath, PathStrokeType(1.f));
     }
 
-    g.setColour(Colours::orange);
+    g.setColour(Colours::black); //rounded rectangle color
     g.drawRoundedRectangle(getRenderArea().toFloat(), 4.f, 1.f);
 
-    g.setColour(Colours::white);
+    g.setColour(Colours::black); //response curve color
     g.strokePath(responseCurve, PathStrokeType(2.f));
 }
 
 void ResponseCurveComponent::resized()
 {
     using namespace juce;
-    background = Image(Image::PixelFormat::RGB, getWidth(), getHeight(), true);
+    background = Image(Image::PixelFormat::ARGB, getWidth(), getHeight(), true);
 
     Graphics g(background);
 
@@ -468,7 +468,7 @@ void ResponseCurveComponent::resized()
         xs.add(left + width * normX);
     }
 
-    g.setColour(Colours::dimgrey);
+    g.setColour(Colours::lightgrey); //vertical line color
     for (auto x : xs)
     {
         g.drawVerticalLine(x, top, bottom);
@@ -482,11 +482,11 @@ void ResponseCurveComponent::resized()
     for (auto gDb : gain)
     {
         auto y = jmap(gDb, -24.f, 24.f, float(bottom), float(top));
-        g.setColour(gDb == 0.f ? Colour(0u, 172u, 1u) : Colours::darkgrey);
+        g.setColour(gDb == 0.f ? Colours::red : Colours::lightgrey); //middle line color
         g.drawHorizontalLine(y, left, right);
     }
 
-    g.setColour(Colours::lightgrey);
+    g.setColour(Colours::black); //top freq color
     const int fontHeight = 10;
     g.setFont(fontHeight);
 
@@ -534,7 +534,7 @@ void ResponseCurveComponent::resized()
         r.setX(getWidth() - textWidth);
         r.setCentre(r.getCentreX(), y);
 
-        g.setColour(gDb == 0.f ? Colour(0u, 172u, 1u) : Colours::lightgrey);
+        g.setColour(gDb == 0.f ? Colours::red : Colours::black); //color of 0 and side mumbers
 
         g.drawFittedText(str, r, juce::Justification::centred, 1);
 
@@ -544,7 +544,7 @@ void ResponseCurveComponent::resized()
         r.setX(1);
         textWidth = g.getCurrentFont().getStringWidth(str);
         r.setSize(textWidth, fontHeight);
-        g.setColour(Colours::lightgrey);
+        g.setColour(Colours::black);
         g.drawFittedText(str, r, juce::Justification::centred, 1);
     }
 }
@@ -688,8 +688,10 @@ SimpleEQAudioProcessorEditor::~SimpleEQAudioProcessorEditor()
 void SimpleEQAudioProcessorEditor::paint(juce::Graphics& g)
 {
     using namespace juce;
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll(Colours::black);
+
+    Image background = ImageCache::getFromMemory(BinaryData::bg_png, BinaryData::bg_pngSize);
+
+    g.drawImageAt(background, 0, 0);
 }
 
 void SimpleEQAudioProcessorEditor::resized()

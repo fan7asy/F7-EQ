@@ -2,7 +2,8 @@
 
 <JUCERPROJECT id="yxKmEp" name="F7 EQ" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" cppLanguageStandard="17"
-              companyName="FAN7ASY" pluginFormats="buildStandalone,buildVST3">
+              companyName="Fan7asy" pluginFormats="buildStandalone,buildVST3"
+              companyWebsite="www.fan7asy.com">
   <MAINGROUP id="H6rUs2" name="F7 EQ">
     <GROUP id="{09A956D9-D2D7-7695-85D2-5C0FA456C4CC}" name="Source">
       <FILE id="IczZDY" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -12,6 +13,9 @@
       <FILE id="gQ2ND6" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
       <FILE id="oN1xFB" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+    <GROUP id="{D731DE86-F616-62B6-CA7E-9F3F8CAF8222}" name="Resources">
+      <FILE id="PUEDIm" name="bg.png" compile="0" resource="1" file="Resources/bg.png"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
