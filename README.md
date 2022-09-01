@@ -1,6 +1,6 @@
 ![screenshot](https://i.imgur.com/L7Co2sb.png)
 
-[download](https://drive.google.com/file/d/1to4XQ8ynweFpwctOyR4beIZ8dNjjT9uz/view)
+[download (vst3 / standalone)](https://drive.google.com/file/d/1to4XQ8ynweFpwctOyR4beIZ8dNjjT9uz/view)
 
 **features:**
 
