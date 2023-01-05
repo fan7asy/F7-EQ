@@ -1,4 +1,4 @@
-![screenshot](https://i.imgur.com/L7Co2sb.png)
+![Watch the video](https://i.imgur.com/L7Co2sb.png)](https://youtu.be/ugDPJvHHLQI)
 
 [download (vst3 / standalone)](https://drive.google.com/file/d/1to4XQ8ynweFpwctOyR4beIZ8dNjjT9uz/view)
 
