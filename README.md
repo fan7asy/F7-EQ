@@ -4,8 +4,6 @@ https://user-images.githubusercontent.com/76165324/210700176-72d75232-0c2d-4ca8-
 
 very simple eq made with modern c++ using JUCE framework
 
-[download (vst3 / standalone)](https://drive.google.com/file/d/1to4XQ8ynweFpwctOyR4beIZ8dNjjT9uz/view)
-
 **features:**
 
  -lowpass and highpass filters with slope variants
